@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Talha | Front End Developer | Modern Portfolio</title>
+  <!-- Google Fonts + reset -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 (free icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0a0c12;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      color: #eef2ff;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #11151f;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2d3a5e;
+      border-radius: 12px;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* navigation */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 1.5rem 0 1rem 0;
+      border-bottom: 1px solid rgba(46, 62, 94, 0.5);
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #a5f0ff, #6c8eff);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.2rem;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #cbd5ff;
+      font-weight: 500;
+      transition: 0.2s ease;
+      font-size: 1rem;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: #8eb0ff;
+      border-bottom: 2px solid #6c8eff;
+      padding-bottom: 4px;
+    }
+
+    /* hero section */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 4rem 0 3rem 0;
+    }
+
+    .hero-badge {
+      background: rgba(108, 142, 255, 0.12);
+      backdrop-filter: blur(2px);
+      padding: 0.4rem 1rem;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #b9ceff;
+      margin-bottom: 1.8rem;
+      border: 0.5px solid rgba(108, 142, 255, 0.3);
+      display: inline-block;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.6rem, 8vw, 4.8rem);
+      font-weight: 800;
+      background: linear-gradient(to right, #ffffff, #b7cdff);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      line-height: 1.2;
+      max-width: 950px;
+    }
+
+    .hero-tagline {
+      font-size: clamp(1rem, 4vw, 1.25rem);
+      color: #b2c9f0;
+      max-width: 650px;
+      margin: 1.5rem auto 2rem;
+      font-weight: 400;
+    }
+
+    .btn-primary {
+      background: #3c5bd9;
+      border: none;
+      padding: 0.85rem 2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 48px;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 8px 20px rgba(60, 91, 217, 0.2);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+    }
+
+    .btn-primary:hover {
+      background: #2b48c4;
+      transform: scale(0.98);
+      box-shadow: 0 4px 12px rgba(60, 91, 217, 0.3);
+    }
+
+    /* section styles */
+    .section {
+      padding: 5rem 0 4rem 0;
+      border-bottom: 1px solid rgba(46, 62, 94, 0.3);
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 2.5rem;
+      letter-spacing: -0.3px;
+      background: linear-gradient(135deg, #eef2ff, #8fa6ff);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      display: inline-block;
+    }
+
+    /* expertise grid */
+    .expertise-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .card {
+      background: rgba(18, 24, 36, 0.7);
+      backdrop-filter: blur(2px);
+      border: 1px solid #2a334a;
+      border-radius: 28px;
+      padding: 1.8rem 1.5rem;
+      transition: all 0.25s;
+    }
+
+    .card:hover {
+      border-color: #5b7ce0;
+      background: rgba(30, 40, 58, 0.8);
+      transform: translateY(-5px);
+    }
+
+    .card h3 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #ccdeff;
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-top: 1.2rem;
+    }
+
+    .tech-item {
+      background: #0f1420;
+      padding: 0.3rem 0.9rem;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #b9d0ff;
+      border: 0.5px solid #2a3b5e;
+    }
+
+    /* projects grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .project-card {
+      background: rgba(10, 14, 23, 0.8);
+      border-radius: 28px;
+      border: 1px solid #252f44;
+      padding: 1.6rem;
+      transition: all 0.2s;
+    }
+
+    .project-card h4 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: #e5edff;
+    }
+
+    .project-desc {
+      color: #a7b9e0;
+      font-size: 0.9rem;
+      margin: 0.75rem 0 1.2rem 0;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .project-tags span {
+      background: #141c2c;
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: #99b5ff;
+    }
+
+    .project-link {
+      color: #6e8eff;
+      text-decoration: none;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* ========== ENHANCED CONTACT SECTION WITH WHATSAPP ========== */
+    .contact-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3rem;
+      background: rgba(12, 16, 26, 0.6);
+      border-radius: 2rem;
+      padding: 2rem;
+      border: 1px solid #262f46;
+      backdrop-filter: blur(4px);
+      margin-top: 1rem;
+    }
+
+    .contact-info {
+      flex: 1.2;
+      min-width: 220px;
+    }
+
+    .contact-info h3 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #d6e6ff;
+    }
+
+    .contact-detail-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      flex-wrap: wrap;
+      transition: 0.2s;
+    }
+    
+    /* WhatsApp item special styling */
+    .contact-detail-item.whatsapp-item {
+      cursor: pointer;
+      border-radius: 1rem;
+      padding: 0.2rem 0;
+      transition: 0.2s;
+    }
+    
+    .contact-detail-item.whatsapp-item:hover {
+      transform: translateX(5px);
+    }
+    
+    .contact-detail-item.whatsapp-item:hover .contact-icon {
+      background: #075e54;
+      color: white;
+      transform: scale(1.05);
+    }
+
+    .contact-icon {
+      width: 48px;
+      height: 48px;
+      background: #1e2a44;
+      border-radius: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      color: #7c9eff;
+      transition: 0.2s;
+    }
+
+    .contact-detail-item p {
+      font-weight: 500;
+      color: #c9dbff;
+    }
+    .contact-detail-item span {
+      font-size: 0.85rem;
+      color: #8699cc;
+    }
+
+    .contact-form {
+      flex: 2;
+      min-width: 260px;
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    .form-group input, .form-group textarea {
+      width: 100%;
+      background: #0f1422;
+      border: 1px solid #2b344f;
+      border-radius: 1.2rem;
+      padding: 0.9rem 1.2rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      color: #f0f4ff;
+      transition: all 0.2s;
+      outline: none;
+    }
+
+    .form-group input:focus, .form-group textarea:focus {
+      border-color: #6c8eff;
+      box-shadow: 0 0 0 3px rgba(108, 142, 255, 0.2);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 110px;
+    }
+
+    .submit-btn {
+      background: #3c5bd9;
+      border: none;
+      padding: 0.85rem 2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 48px;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .submit-btn:hover {
+      background: #2b48c4;
+      transform: translateY(-2px);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1.2rem;
+      margin-top: 2rem;
+    }
+
+    .social-links a {
+      background: #111724;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #b3ccff;
+      font-size: 1.3rem;
+      transition: 0.2s;
+      text-decoration: none;
+    }
+
+    .social-links a:hover {
+      background: #2d3f6e;
+      color: white;
+      transform: scale(1.05);
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 2rem 0 2.5rem 0;
+      gap: 1rem;
+      font-size: 0.85rem;
+      color: #6f7e9e;
+    }
+
+    .datetime {
+      font-family: monospace;
+      background: #0f1622;
+      padding: 0.3rem 0.8rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      letter-spacing: 0.3px;
+    }
+
+    /* success toast */
+    .toast-msg {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: #1c2c48;
+      backdrop-filter: blur(12px);
+      border-left: 4px solid #6c8eff;
+      padding: 12px 20px;
+      border-radius: 60px;
+      color: white;
+      font-size: 0.9rem;
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+      font-weight: 500;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+    }
+
+    /* Floating WhatsApp Button */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      background-color: #25D366;
+      color: white;
+      border-radius: 50px;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+      z-index: 99;
+      transition: 0.2s;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.2);
+      cursor: pointer;
+    }
+    
+    .whatsapp-float:hover {
+      transform: scale(1.05);
+      background-color: #128C7E;
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+    }
+    
+    @media (max-width: 650px) {
+      .whatsapp-float span {
+        display: none;
+      }
+      .whatsapp-float {
+        padding: 12px;
+        border-radius: 50px;
+      }
+    }
+
+    /* responsive */
+    @media (max-width: 780px) {
+      .container {
+        padding: 0 1.5rem;
+      }
+      .navbar {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+      }
+      .nav-links {
+        gap: 1.5rem;
+      }
+      .hero {
+        padding: 2rem 0;
+      }
+      .section {
+        padding: 3rem 0;
+      }
+      .contact-wrapper {
+        flex-direction: column;
+        padding: 1.5rem;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 1.2rem;
+      }
+      .card {
+        padding: 1.3rem;
+      }
+      .hero h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- navigation: Home, Skills, Projects, Contact -->
+    <nav class="navbar">
+      <div class="logo">TALHA PORTFOLIO</div>
+      <ul class="nav-links">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#contact" class="nav-link" id="contactNavLink">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Hero / Home section -->
+    <section id="home">
+      <div class="hero">
+        <span class="hero-badge">✦ FRONT END + UI/UX</span>
+        <h1>Front End Developer</h1>
+        <div class="hero-tagline">
+          Building digital experiences that merge creativity with technology<br>
+          specialization in modern web development.
+        </div>
+        <button class="btn-primary" id="letsConnectBtn"><i class="fas fa-paper-plane"></i> Let's Connect</button>
+      </div>
+    </section>
+
+    <!-- Skills: Technical Expertise + UI/UX -->
+    <section id="skills" class="section">
+      <h2 class="section-title">Technical Expertise</h2>
+      <div class="expertise-grid">
+        <div class="card">
+          <h3>⚡ Frontend Development</h3>
+          <div class="tech-stack">
+            <span class="tech-item">HTML5</span>
+            <span class="tech-item">JavaScript</span>
+            <span class="tech-item">CSS3</span>
+            <span class="tech-item">React</span>
+          </div>
+          <p style="margin-top: 1rem; font-size:0.9rem; color:#b2c5f0;">Interactive, accessible & lightning-fast UIs</p>
+        </div>
+        <div class="card">
+          <h3>🖧 Backend Development</h3>
+          <div class="tech-stack">
+            <span class="tech-item">Node.js</span>
+            <span class="tech-item">Python</span>
+            <span class="tech-item">Express</span>
+          </div>
+          <p style="margin-top: 1rem; font-size:0.9rem; color:#b2c5f0;">Scalable APIs, real-time systems & cloud ready</p>
+        </div>
+        <div class="card">
+          <h3>🎨 UI/UX Design</h3>
+          <div class="tech-stack">
+            <span class="tech-item">Figma</span>
+            <span class="tech-item">Adobe XD</span>
+            <span class="tech-item">Prototyping</span>
+          </div>
+          <p style="margin-top: 1rem; font-size:0.9rem; color:#b2c5f0;">User-centered design, wireframes & high-fidelity mockups</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+      <h2 class="section-title">Featured Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <h4>CyberMonitor</h4>
+          <div class="project-desc">Real-time threat detection dashboard with WebSocket + Node.js and interactive D3 visualizations.</div>
+          <div class="project-tags"><span>React</span><span>Node.js</span><span>Socket.io</span></div>
+          <a href="#" class="project-link demo-link">Live demo →</a>
+        </div>
+        <div class="project-card">
+          <h4>AI Content Studio</h4>
+          <div class="project-desc">Generative AI platform for automated content creation using Python, FastAPI and OpenAI API.</div>
+          <div class="project-tags"><span>Python</span><span>FastAPI</span><span>React</span></div>
+          <a href="#" class="project-link demo-link">Case study →</a>
+        </div>
+        <div class="project-card">
+          <h4>Nexus Design System</h4>
+          <div class="project-desc">Component library & design tokens built with Figma + Storybook, adopted by 3+ product teams.</div>
+          <div class="project-tags"><span>Figma</span><span>Storybook</span><span>Adobe XD</span></div>
+          <a href="#" class="project-link demo-link">Explore →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CONTACT SECTION WITH WHATSAPP NUMBER ADDED ========== -->
+    <section id="contact" class="section" style="border-bottom: none;">
+      <h2 class="section-title"><i class="fas fa-envelope-open-text"></i> Contact Us</h2>
+      <div class="contact-wrapper">
+        <!-- left side info with WhatsApp -->
+        <div class="contact-info">
+          <h3>Let's talk <span style="color:#6c8eff;">innovation</span></h3>
+          <p style="margin-bottom: 1rem; color:#b7ccff;">Whether you have a project in mind, need a front-end expert, or just want to say hi — I'm one message away.</p>
+          
+          <!-- Location -->
+          <div class="contact-detail-item">
+            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div><p>ISLAMABAD (Remote)</p><span>Available worldwide</span></div>
+          </div>
+          
+          <!-- Email -->
+          <div class="contact-detail-item">
+            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+            <div><p>pakmarkhor9t9@gmail.com</p><span>Response within 24h</span></div>
+          </div>
+          
+          <!-- WHATSAPP NUMBER - CLICKABLE (ADDED) -->
+          <div class="contact-detail-item whatsapp-item" id="whatsappContact">
+            <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
+            <div>
+              <p><strong style="color:#25D366;">+923464639671</strong></p>
+              <span>WhatsApp — Direct chat | Quick replies</span>
+            </div>
+          </div>
+          
+          <!-- Discord -->
+          <div class="contact-detail-item">
+            <div class="contact-icon"><i class="fab fa-discord"></i></div>
+            <div><p>talha.void</p><span>Discord / Telegram</span></div>
+          </div>
+          
+          <div class="social-links">
+            <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" aria-label="X / Twitter"><i class="fab fa-x-twitter"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        
+        <!-- right side form (functional contact form) -->
+        <div class="contact-form">
+          <form id="contactForm">
+            <div class="form-group">
+              <input type="text" id="fullName" placeholder="Full name *" required>
+            </div>
+            <div class="form-group">
+              <input type="email" id="emailAddress" placeholder="Email address *" required>
+            </div>
+            <div class="form-group">
+              <input type="text" id="subjectLine" placeholder="Subject">
+            </div>
+            <div class="form-group">
+              <textarea id="messageContent" placeholder="Tell me about your project or idea... *" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer with dynamic datetime -->
+    <footer>
+      <div class="footer-bottom">
+        <span>© 2026 Talha Developer. All rights reserved.</span>
+        <div class="datetime" id="liveDateTime">12:35 am — 03/04/2026</div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- FLOATING WHATSAPP BUTTON for easy access -->
+  <div id="whatsappFloatBtn" class="whatsapp-float">
+    <i class="fab fa-whatsapp" style="font-size: 1.5rem;"></i>
+    <span>Chat on WhatsApp</span>
+  </div>
+
+  <!-- Toast notification -->
+  <div id="toastMsg" class="toast-msg">✨ Message sent! I'll get back soon.</div>
+
+  <script>
+    (function() {
+      // ========== CONFIGURE YOUR WHATSAPP NUMBER HERE ==========
+      // Update with your actual WhatsApp number (digits only, no '+' or spaces)
+      // Example for Pakistan: "923001234567" (without '+' sign)
+      const WHATSAPP_NUMBER = "+923464639671";  // <-- CHANGE THIS TO YOUR REAL WHATSAPP NUMBER
+      const WHATSAPP_MESSAGE = "Hello Talha! I'm interested in your front-end development services How Can I Help You.";
+      // ========================================================
+      
+      // Function to open WhatsApp chat
+      function openWhatsApp() {
+        const encodedMsg = encodeURIComponent(WHATSAPP_MESSAGE);
+        window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMsg}`, '_blank');
+      }
+      
+      // Live date & time update
+      function updateDateTime() {
+        const now = new Date();
+        let hours = now.getHours();
+        let minutes = now.getMinutes();
+        const ampm = hours >= 12 ? 'pm' : 'am';
+        hours = hours % 12;
+        hours = hours ? hours : 12;
+        const minutesStr = minutes < 10 ? '0' + minutes : minutes;
+        const timeString = `${hours}:${minutesStr} ${ampm}`;
+        const day = now.getDate();
+        const month = now.getMonth() + 1;
+        const year = now.getFullYear();
+        const dateString = `${day.toString().padStart(2,'0')}/${month.toString().padStart(2,'0')}/${year}`;
+        const dateTimeElement = document.getElementById('liveDateTime');
+        if (dateTimeElement) dateTimeElement.textContent = `${timeString} — ${dateString}`;
+      }
+      updateDateTime();
+      setInterval(updateDateTime, 1000);
+      
+      // Toast helper
+      const toast = document.getElementById('toastMsg');
+      function showToast(message) {
+        toast.textContent = message || "✨ Message sent! I'll get back soon.";
+        toast.style.opacity = '1';
+        setTimeout(() => {
+          toast.style.opacity = '0';
+        }, 3000);
+      }
+      
+      // Contact form handler (fully functional with validation)
+      const contactForm = document.getElementById('contactForm');
+      if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const name = document.getElementById('fullName')?.value.trim();
+          const email = document.getElementById('emailAddress')?.value.trim();
+          const subject = document.getElementById('subjectLine')?.value.trim() || 'No subject';
+          const message = document.getElementById('messageContent')?.value.trim();
+          
+          if (!name || !email || !message) {
+            showToast("⚠️ Please fill all required fields (name, email, message).");
+            return;
+          }
+          if (!email.includes('@') || !email.includes('.')) {
+            showToast("📧 Please enter a valid email address.");
+            return;
+          }
+          
+          console.log(`Contact inquiry from ${name} (${email}): ${subject} - ${message}`);
+          contactForm.reset();
+          showToast("✅ Message sent! Talha will reach out within 24h.");
+        });
+      }
+      
+      // "Let's Connect" button smooth scroll
+      const connectBtn = document.getElementById('letsConnectBtn');
+      if (connectBtn) {
+        connectBtn.addEventListener('click', () => {
+          document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          setTimeout(() => {
+            showToast("📬 Scroll to contact form — or WhatsApp me directly!");
+          }, 500);
+        });
+      }
+      
+      // WhatsApp click handlers (contact item + floating button)
+      const whatsappItem = document.getElementById('whatsappContact');
+      if (whatsappItem) {
+        whatsappItem.addEventListener('click', (e) => {
+          e.preventDefault();
+          openWhatsApp();
+          showToast("💬 Opening WhatsApp...");
+        });
+      }
+      
+      const whatsappFloat = document.getElementById('whatsappFloatBtn');
+      if (whatsappFloat) {
+        whatsappFloat.addEventListener('click', (e) => {
+          e.preventDefault();
+          openWhatsApp();
+          showToast("📱 Redirecting to WhatsApp");
+        });
+      }
+      
+      // active navigation highlight + smooth scroll
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.nav-link');
+      
+      function setActiveLink() {
+        let current = '';
+        const scrollPos = window.scrollY + 120;
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionBottom = sectionTop + section.offsetHeight;
+          if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
+            current = section.getAttribute('id');
+          }
+        });
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          const href = link.getAttribute('href').substring(1);
+          if (href === current) {
+            link.classList.add('active');
+          }
+        });
+      }
+      
+      window.addEventListener('scroll', setActiveLink);
+      window.addEventListener('load', setActiveLink);
+      
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href').substring(1);
+          const targetElem = document.getElementById(targetId);
+          if (targetElem) {
+            targetElem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+      
+      // Project demo links placeholder
+      const demoLinks = document.querySelectorAll('.demo-link');
+      demoLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          showToast("🔍 Full case study available — contact me for private repo access.");
+        });
+      });
+      
+      // Social links placeholder toast
+      const socialIcons = document.querySelectorAll('.social-links a');
+      socialIcons.forEach(icon => {
+        icon.addEventListener('click', (e) => {
+          e.preventDefault();
+          showToast("🌐 Connect with me via WhatsApp or email — I'm active on LinkedIn/GitHub.");
+        });
+      });
+      
+      // Contact nav highlight pulse
+      const contactNav = document.getElementById('contactNavLink');
+      if(contactNav) {
+        contactNav.addEventListener('click', () => {
+          setTimeout(() => {
+            document.querySelector('.contact-wrapper')?.classList.add('highlight-pulse');
+            setTimeout(() => document.querySelector('.contact-wrapper')?.classList.remove('highlight-pulse'), 800);
+          }, 300);
+        });
+      }
+    })();
+  </script>
+  <style>
+    .highlight-pulse {
+      box-shadow: 0 0 0 3px #6c8eff, 0 0 0 6px rgba(108,142,255,0.2);
+      transition: 0.1s;
+      border-radius: 2rem;
+    }
+  </style>
+</body>
+</html>
